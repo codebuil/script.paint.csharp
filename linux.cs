@@ -45,22 +45,7 @@ public class Program : Form
     {
         // Faz o parse do comando
         string command = this.textBox.Text;
-        string[] parts = command.Split(',');
-        if (parts.Length != 5 || parts[0] != "line")
-        {
-            MessageBox.Show("Comando inválido");
-            return;
-        }
-
-        // Desenha a linha na picturebox
-        int x1 = int.Parse(parts[1]);
-        int y1 = int.Parse(parts[2]);
-        int x2 = int.Parse(parts[3]);
-        int y2 = int.Parse(parts[4]);
-        using (Graphics g = Graphics.FromImage(this.pictureBox.Image))
-        {
-            g.DrawLine(Pens.White, x1, y1, x2, y2);
-        }
+        CarregarArquivo(command);
         this.pictureBox.Invalidate();
     }
 
@@ -69,4 +54,30 @@ public class Program : Form
         Application.EnableVisualStyles();
         Application.Run(new Program());
     }
+    private void CarregarArquivo(string caminho)
+    {
+        string[] linhas = System.IO.File.ReadAllLines(caminho); // Lê todas as linhas do arquivo
+
+        foreach (string linha in linhas) // Percorre cada linha do arquivo
+        {
+            if (linha.StartsWith("line")) // Verifica se a linha começa com a string "line,0,0,100"
+            {
+                // Separa as coordenadas da linha
+                string[] coords = linha.Split(',');
+                    int x1 = int.Parse(coords[1]);
+                    int y1 = int.Parse(coords[2]);
+                    int x2 = int.Parse(coords[3]);
+                    int y2 = int.Parse(coords[4]);
+
+                    // Desenha a linha na picture1 em branco
+                    using (Graphics g = Graphics.FromImage(pictureBox.Image))
+                    {
+                        Pen pen = new Pen(Color.White);
+                        g.DrawLine(pen, x1, y1, x2, y2);
+                    }
+                
+            }
+        }
+    }
+
 }
