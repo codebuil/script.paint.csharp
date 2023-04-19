@@ -14,7 +14,7 @@ public class Program : Form
         // Configurações do formulário
         this.Text = "Exemplo de programa";
         this.BackColor = Color.Blue;
-        this.ClientSize = new Size(400, 300);
+        this.ClientSize = new Size(800, 800);
 
         // Configurações do textbox
         this.textBox = new TextBox();
@@ -26,7 +26,7 @@ public class Program : Form
         // Configurações da picturebox
         this.pictureBox = new PictureBox();
         this.pictureBox.Location = new Point(220, 10);
-        this.pictureBox.Size = new Size(170, 280);
+        this.pictureBox.Size = new Size(800, 800);
         this.pictureBox.BackColor = Color.Blue;
         this.pictureBox.Image = new Bitmap(800, 800);
         this.Controls.Add(this.pictureBox);
